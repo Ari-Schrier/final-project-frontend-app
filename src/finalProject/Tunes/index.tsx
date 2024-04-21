@@ -5,8 +5,6 @@ import { findTunes } from "./client";
 import { setTunes } from "./reducer";
 import { TroveState } from "../store";
 
-const TUNESAPI = "http://localhost:4000/api/tunes";
-
 function TuneList(){
     const tuneList = useSelector((state: TroveState) => 
         state.tunesReducer.tunes);
@@ -20,7 +18,7 @@ function TuneList(){
     return(
         <ul>
         {tuneList.map((tune:any) => (
-            <li>{tune.name}</li>
+            <li><Link to={`/Tunes/${tune.sessionId}`} className="text-decoration-none">{tune.name}</Link></li>
         ))}
         </ul>
     );

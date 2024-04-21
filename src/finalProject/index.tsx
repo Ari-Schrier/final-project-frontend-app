@@ -6,8 +6,9 @@ import Login from "./Login";
 import Home from "./Home";
 import Navigation from "./Navigation";
 import Profile from "./Profile";
-import Search from "./Search";
+import Search from "./Tunes/Search";
 import TuneList from "./Tunes";
+import Tune from "./Tunes/Tune"
 import { Link } from "react-router-dom";
 import store from "./store";
 import { Provider } from "react-redux";
@@ -24,10 +25,11 @@ function FinalProject(){
                         <Route path="/" element={<Navigate to="/home"/>} />
                         <Route path="/details"   element={<Details/>}/>
                         <Route path="/tunes" element={<TuneList/>}/>
+                        <Route path="/tunes/:sessionId" element={<Tune/>}/>
                         <Route path="/home" element={<Home/>}/>
                         <Route path="/login"    element={<Login/>}/>
                         <Route path="/profile"    element={<Profile/>}/>
-                        <Route path="/search"    element={<Search/>}/>
+                        <Route path="/search/:query"    element={<Search/>}/>
                         </Routes>
                     </div>
             </Provider>

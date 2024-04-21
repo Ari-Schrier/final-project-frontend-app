@@ -3,6 +3,7 @@ import tunesReducer from "../Tunes/reducer";
 export interface TroveState {
   tunesReducer: {
     tunes: any[];
+    tune:any;
   };
 }
 const store = configureStore({

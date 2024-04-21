@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {tunes:<any>[]};
+const initialState = {
+    tunes:<any>[],
+    tune: {name:"", type:"", aliases:[], comments:[], sets:[]}
+};
 
 const tunesSlice = createSlice({
     name: "tunes",
     initialState,
     reducers: {
         
+        setTune: (state, action) => {state.tune = action.payload},
         setTunes: (state, action) => {state.tunes = action.payload},
         addTune: (state, action) => {
             state.tunes = [
@@ -33,5 +37,5 @@ const tunesSlice = createSlice({
   
   
   export const { addTune, deleteTune,
-    updateTune, setTunes} = tunesSlice.actions;
+    updateTune, setTunes, setTune} = tunesSlice.actions;
   export default tunesSlice.reducer;

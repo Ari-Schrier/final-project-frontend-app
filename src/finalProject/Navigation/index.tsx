@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
+import { useState } from "react";
 
 function Navigation(){
+    const [query, setQuery] = useState("");
     return(
         <div className="row bg-success p-4 rounded-bottom">
             <div className="col-1"></div>
@@ -16,8 +18,8 @@ function Navigation(){
             <div className="col-6">
             </div>
             <div className="col-2">
-                <input type="text" placeholder="Search.." className="float-end form-control" />
-                <Link to="/search" className="text-decoration-none h1 text-warning">Search</Link>
+                <input type="text" value={query} onChange={(e)=>setQuery(e.target.value)} placeholder="Search.." className="float-end form-control" />
+                <Link to={`/search/${query}`} className="text-decoration-none h1 text-warning">Search</Link>
             </div>
         </div>
     );
