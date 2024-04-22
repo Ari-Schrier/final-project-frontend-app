@@ -1,11 +1,31 @@
 import axios from "axios";
 const TUNES_API = "http://localhost:4000/api/tunes";
+const COMMENTS_API = "http://localhost:4000/api/comments";
 
 export const findTunes = async () => {
   const response = await axios
     .get(TUNES_API);
   return response.data;
 };
+
+export const updateTune = async (payload:any) => {
+  const response = await axios.put(`${TUNES_API}/${payload._id}`,  payload);
+  return response.data;
+}
+
+export const deleteAComment = async(target:any) => {
+  const response = await axios.delete(`${COMMENTS_API}/${target}`);
+}
+
+export const createComment = async(payload:any) => {
+  const response = await axios.post(COMMENTS_API, payload);
+  return response.data;
+}
+
+export const getCommentsFor = async(tuneId:any) => {
+  const response = await axios.get(`${COMMENTS_API}/${tuneId}`);
+  return response.data;
+}
 
 export const searchTunes = async (query:any) => {
   const response:any = await axios.get(`https://thesession.org/tunes/search?q=${query}&format=json`);
@@ -29,8 +49,6 @@ export const lookupTune = async (query:any) => {
     sets:[],
     sessionId: query
   }
-  console.log("Adding new tune:")
-  console.log(tune);
   const responsetwo = await axios.post(TUNES_API, tune);
   return responsetwo.data
 }
