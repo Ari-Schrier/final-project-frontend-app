@@ -2,19 +2,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { TroveState } from "../../store";
 import { Link, useParams } from "react-router-dom";
-import { findTune, lookupTune, updateTune, createComment, getCommentsFor, deleteAComment } from "../client";
+import { findTune, lookupTune, createComment, getCommentsFor, deleteAComment } from "../client";
 import { setTune } from "../reducer";
+import { profile } from "../../Account/Users/client";
+import { current } from "@reduxjs/toolkit";
 
 function Tune(){
     const {sessionId} = useParams();
+    const [currentUser, setCurrentUser] = useState({username:"nobody"});
     const tune = useSelector((state: TroveState) => 
         state.tunesReducer.tune);
     const dispatch = useDispatch();
     const [thoughts, setThoughts] = useState("");
     const[comments, setComments] = useState([]);
     const addComment = ()=>{
-        createComment({author:"newguy", text:thoughts, subject:tune._id}).then(()=> {
-            getCommentsFor(tune._id).then((comments)=>setComments(comments));
+        createComment({author:currentUser.username, text:thoughts, subjectNum:tune.sessionId, subjectName: tune.name}).then(()=> {
+            getCommentsFor(tune.sessionId).then((comments)=>setComments(comments));
+            console.log(comments);
         });
             
     };
@@ -25,10 +29,11 @@ function Tune(){
 
     }
     useEffect(() => {
+        profile().then((prof:any)=>setCurrentUser(prof));
         findTune(sessionId)
           .then((tune) =>{
             dispatch(setTune(tune));
-            getCommentsFor(tune._id).then((comments)=>setComments(comments));}
+            getCommentsFor(tune.sessionId).then((comments)=>setComments(comments));}
         ).catch(error =>{
             lookupTune(sessionId)
             .then((tune) => {
@@ -38,6 +43,7 @@ function Tune(){
     }, []);
     return(
         <div className="row">
+            {comments.map((comment:any)=>(<div>{comment.text}</div>))}
             <div className="col-3"></div>
             <div className="col-6 text-center"> 
                 <div className="h1">{tune.name}</div>
@@ -53,17 +59,17 @@ function Tune(){
                     {comments.map((comment:any) => (
                         <li className="list-group-item">
                             <span>{comment.author} says: {comment.text}</span>
-                            <button className="float-end btn btn-danger" onClick={()=>deleteComment(comment._id)}>DELETE</button>
+                            {(currentUser.username === comment.author) && <button className="float-end btn btn-danger" onClick={()=>deleteComment(comment._id)}>DELETE</button>}
                             </li>
                     ))}
-                    <li className="list-group-item">
+                    {(currentUser.username !== "nobody") && <li className="list-group-item">
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <button className="btn btn-lg m-2 btn-success mt-3" onClick={()=>addComment()}>Post!</button>
                             </div>
                             <textarea className="form-control" value={thoughts} onChange={(e)=>setThoughts(e.target.value)} aria-label="With textarea"></textarea>
                         </div>
-                    </li>
+                    </li>}
                 </ul>
             </div>
             <div className="col-3"></div>

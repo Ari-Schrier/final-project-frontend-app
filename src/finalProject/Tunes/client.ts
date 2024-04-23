@@ -23,7 +23,7 @@ export const createComment = async(payload:any) => {
 }
 
 export const getCommentsFor = async(tuneId:any) => {
-  const response = await axios.get(`${COMMENTS_API}/${tuneId}`);
+  const response = await axios.get(`${COMMENTS_API}/tune/${tuneId}`);
   return response.data;
 }
 

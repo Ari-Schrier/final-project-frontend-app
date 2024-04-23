@@ -13,7 +13,7 @@ function Navigation(){
                 <Link to="/login" className="text-decoration-none h1 text-warning">Login</Link>
             </div>
             <div className="col-1">
-                <Link to="/profile" className="text-decoration-none h1 text-warning">Profile</Link>
+                <Link to="/account" className="text-decoration-none h1 text-warning">Profile</Link>
             </div>
             <div className="col-6">
             </div>
