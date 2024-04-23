@@ -17,8 +17,7 @@ function Tune(){
     const[comments, setComments] = useState([]);
     const addComment = ()=>{
         createComment({author:currentUser.username, text:thoughts, subjectNum:tune.sessionId, subjectName: tune.name}).then(()=> {
-            getCommentsFor(tune.sessionId).then((comments)=>setComments(comments));
-            console.log(comments);
+            getCommentsFor(tune.sessionId).then((comments)=>{setComments(comments); setThoughts("");});
         });
             
     };
@@ -43,7 +42,7 @@ function Tune(){
     }, []);
     return(
         <div className="row">
-            {comments.map((comment:any)=>(<div>{comment.text}</div>))}
+            {currentUser.username}
             <div className="col-3"></div>
             <div className="col-6 text-center"> 
                 <div className="h1">{tune.name}</div>
@@ -62,7 +61,7 @@ function Tune(){
                             {(currentUser.username === comment.author) && <button className="float-end btn btn-danger" onClick={()=>deleteComment(comment._id)}>DELETE</button>}
                             </li>
                     ))}
-                    {(currentUser.username !== "nobody") && <li className="list-group-item">
+                    {(currentUser.username) && <li className="list-group-item">
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <button className="btn btn-lg m-2 btn-success mt-3" onClick={()=>addComment()}>Post!</button>

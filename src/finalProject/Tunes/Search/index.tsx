@@ -1,32 +1,14 @@
-import {Link, useParams} from "react-router-dom";
-import React, {useState, useEffect} from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { searchTunes } from "../client";
-import { setTunes } from "../reducer";
-import { TroveState } from "../../store";
-
+import { useState } from "react";
+import {Link} from "react-router-dom";
 
 function Search(){
-    const {query} = useParams();
-    const tuneList = useSelector((state: TroveState) => 
-        state.tunesReducer.tunes);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        searchTunes(query)
-          .then((tunes:any) =>
-            dispatch(setTunes(tunes))
-        );
-      }, [query]);
+    const [query, setQuery] = useState("")
     return(
-        <div className="container text-center">
-            {tuneList.length==0 && <div className="h3">No Tunes Found</div>}
-            <ul className="list-group">
-                <li className="list-group-item">Search Results:</li>
-            {tuneList.map((tune:any) => (
-                <li className="list-group-item"><Link to={`/Tunes/${tune.id}`} className="text-decoration-none">{tune.name}</Link></li>
-            ))}
-            </ul>
+        <div className="d-flex justify-content-center">
+            <div><input type="text" value={query} onChange={(e)=>setQuery(e.target.value)} placeholder="Search.." className="float-end form-control" /></div>
+                <div><Link to={`/search/${query}`} className="text-decoration-none h1 text-success">Search</Link></div>
         </div>
     );
 }
+
 export default Search;

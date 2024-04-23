@@ -8,6 +8,7 @@ import Account from "./Account"
 import Home from "./Home";
 import Navigation from "./Navigation";
 import Profile from "./Profile";
+import Results from "./Tunes/Search/Results";
 import Search from "./Tunes/Search";
 import TuneList from "./Tunes";
 import Tune from "./Tunes/Tune"
@@ -31,7 +32,8 @@ function FinalProject(){
                         <Route path="/home" element={<Home/>}/>
                         <Route path="/login"    element={<Signup/>}/>
                         <Route path="/account/*"    element={<Account/>}/>
-                        <Route path="/search/:query"    element={<Search/>}/>
+                        <Route path="/search/:query"    element={<Results/>}/>
+                        <Route path="/search" element={<Search/>}/>
                         </Routes>
                     </div>
             </Provider>

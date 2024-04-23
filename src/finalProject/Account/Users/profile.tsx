@@ -29,7 +29,7 @@ export default function Profile() {
   return (
     <div className="container">
       <h1>Profile</h1>
-      {profile && (
+      {profile.username && (
         <div>
             <div className="input-group">
                 <span className="input-group-text">Username:</span>

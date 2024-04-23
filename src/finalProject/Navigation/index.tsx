@@ -4,22 +4,21 @@ import { useState } from "react";
 function Navigation(){
     const [query, setQuery] = useState("");
     return(
-        <div className="row bg-success p-4 rounded-bottom">
-            <div className="col-1"></div>
-            <div className="col-1  text-danger">
+        <div className="d-flex flex-row justify-content-around align-items-center bg-success">
+            <div className="text-danger">
                 <Link to="/home" className="text-decoration-none h1 text-warning">Home</Link>
             </div>
-            <div className="col-1">
-                <Link to="/login" className="text-decoration-none h1 text-warning">Login</Link>
+            <div className="mx-5">
+                <Link to="/account/Signin" className="text-decoration-none h1 text-warning">Login</Link>
             </div>
-            <div className="col-1">
-                <Link to="/account" className="text-decoration-none h1 text-warning">Profile</Link>
+            <div className="mx-5">
+                <Link to="/account/Profile" className="text-decoration-none h1 text-warning">Profile</Link>
             </div>
-            <div className="col-6">
+            <div className="mx-5">
             </div>
-            <div className="col-2">
+            <div className="float-end">
                 <input type="text" value={query} onChange={(e)=>setQuery(e.target.value)} placeholder="Search.." className="float-end form-control" />
-                <Link to={`/search/${query}`} className="text-decoration-none h1 text-warning">Search</Link>
+                <Link onClick={()=>setQuery("")} to={`/search/${query}`} className="text-decoration-none h1 text-warning">Search</Link>
             </div>
         </div>
     );
