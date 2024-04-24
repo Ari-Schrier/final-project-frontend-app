@@ -1,10 +1,16 @@
 import * as client from "./client";
+import { getSetsBy } from "../../Sets/client";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Profile() {
   const [profile, setProfile] = useState({ username: "nobody", password: "", 
     email: "", role: "USER" });
     const [comments, setComments] = useState([]);
+    const [sets, setSets] = useState<any[]>([]);
+    const fetchSets = async () => {
+        const mySets = await getSetsBy(profile);
+        setSets(mySets);
+    }
   const navigate = useNavigate();
   const fetchProfile = async () => {
     const account = await client.profile();
@@ -25,9 +31,14 @@ export default function Profile() {
   useEffect(() => {
     fetchProfile();
   }, []);
-  useEffect(()=>{fetchComments();},[profile])
+  useEffect(()=>{fetchComments();},[profile]);
+  useEffect(()=>{fetchSets();},[profile]);
   return (
     <div className="container">
+      <ul>
+        <li>{sets.length}</li>
+      {sets.map((set)=><li>FREEP</li>)}
+      </ul>
       <h1>Profile</h1>
       {profile.username && (
         <div>
@@ -71,17 +82,22 @@ export default function Profile() {
         <div className="row">
             <div className="col-md-6 col-12">
                 <ul className="list-group">
-                    <li className="list-group-item">Comment History:</li>
+                    <li className="list-group-item bg-warning">Comment History:</li>
                     {comments.map((comment:any)=>
                         <li className="list-group-item">
-                        "{comment.text}" on <span onClick={()=>navigate(`/Tunes/${comment.subjectNum}`)}>{comment.subjectName}</span>
+                        "{comment.text}" on <span className="font-primary" onClick={()=>navigate(`/Tunes/${comment.subjectNum}`)}>{comment.subjectName}</span>
                     </li>)}
 
                 </ul>
             </div>
-            <div className="col-md-6 col-12">Sets</div>
+            <div className="col-md-6 col-12">
+                <li className="list-group-item bg-warning">Sets:</li>
+                    {sets.map((set:any)=>
+                        <li className="list-group-item">
+                        <span onClick={()=>navigate(`/Sets/${set.name}`)}>{set.name}</span>
+                    </li>)}
+            </div>
         </div>
-
         </div>
       )}
     </div>

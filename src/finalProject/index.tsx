@@ -7,7 +7,6 @@ import Login from "./Login";
 import Account from "./Account"
 import Home from "./Home";
 import Navigation from "./Navigation";
-import Profile from "./Profile";
 import Results from "./Tunes/Search/Results";
 import Search from "./Tunes/Search";
 import TuneList from "./Tunes";

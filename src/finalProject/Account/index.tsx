@@ -2,7 +2,6 @@ import Signin from "./Users/signin";
 import Profile from "./Users/profile";
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { profile } from "./Users/client";
 import Signup from "./Users/signup";
 export default function Account() {
   return (
