@@ -9,7 +9,7 @@ import { current } from "@reduxjs/toolkit";
 
 function Tune(){
     const {sessionId} = useParams();
-    const [currentUser, setCurrentUser] = useState({username:"nobody"});
+    const [currentUser, setCurrentUser] = useState({username:"nobody", role:"USER"});
     const tune = useSelector((state: TroveState) => 
         state.tunesReducer.tune);
     const dispatch = useDispatch();
@@ -43,12 +43,13 @@ function Tune(){
     return(
         <div className="row">
             {currentUser.username}
+            {currentUser.role}
             <div className="col-3"></div>
             <div className="col-6 text-center"> 
                 <div className="h1">{tune.name}</div>
                 <ul className="list-group border-0">
                     <li className="list-group-item border-0 h4">Also Known As:</li>
-                    {tune.aliases.map((alias:any) => (
+                    {tune.aliases.slice(0,5).map((alias:any) => (
                         <li className="list-group-item border-0 h5">{alias}</li>
                     ))}
                 </ul>
@@ -58,10 +59,10 @@ function Tune(){
                     {comments.map((comment:any) => (
                         <li className="list-group-item">
                             <span>{comment.author} says: {comment.text}</span>
-                            {(currentUser.username === comment.author) && <button className="float-end btn btn-danger" onClick={()=>deleteComment(comment._id)}>DELETE</button>}
+                            {(currentUser.username === comment.author || currentUser.role === "ADMIN") && <button className="float-end btn btn-danger" onClick={()=>deleteComment(comment._id)}>DELETE</button>}
                             </li>
                     ))}
-                    {(currentUser.username) && <li className="list-group-item">
+                    {(currentUser.username) && (currentUser.role != "WARNED") && <li className="list-group-item">
                         <div className="input-group">
                             <div className="input-group-prepend">
                                 <button className="btn btn-lg m-2 btn-success mt-3" onClick={()=>addComment()}>Post!</button>

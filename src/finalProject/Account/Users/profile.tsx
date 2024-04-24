@@ -17,7 +17,7 @@ export default function Profile() {
     setProfile(account);
   };
   const fetchComments = async () => {
-    const myComments = await client.getCommentsBy(profile);
+    const myComments = await client.getCommentsBy(profile.username);
     setComments(myComments);
 
   };
@@ -35,11 +35,7 @@ export default function Profile() {
   useEffect(()=>{fetchSets();},[profile]);
   return (
     <div className="container">
-      <ul>
-        <li>{sets.length}</li>
-      {sets.map((set)=><li>FREEP</li>)}
-      </ul>
-      <h1>Profile</h1>
+      <h1>My Profile:</h1>
       {profile.username && (
         <div>
             <div className="input-group">
@@ -85,17 +81,19 @@ export default function Profile() {
                     <li className="list-group-item bg-warning">Comment History:</li>
                     {comments.map((comment:any)=>
                         <li className="list-group-item">
-                        "{comment.text}" on <span className="font-primary" onClick={()=>navigate(`/Tunes/${comment.subjectNum}`)}>{comment.subjectName}</span>
+                        "{comment.text}" on <span className="text-primary" onClick={()=>navigate(`/Tunes/${comment.subjectNum}`)}>{comment.subjectName}</span>
                     </li>)}
 
                 </ul>
             </div>
             <div className="col-md-6 col-12">
+              <ul className="list-group">
                 <li className="list-group-item bg-warning">Sets:</li>
                     {sets.map((set:any)=>
                         <li className="list-group-item">
-                        <span onClick={()=>navigate(`/Sets/${set.name}`)}>{set.name}</span>
+                        <span className="text-primary" onClick={()=>navigate(`/Sets/${set.name}`)}>{set.name}</span>
                     </li>)}
+              </ul>
             </div>
         </div>
         </div>
