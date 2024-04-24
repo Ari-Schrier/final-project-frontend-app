@@ -47,18 +47,18 @@ function Tune(){
             <div className="col-3"></div>
             <div className="col-6 text-center"> 
                 <div className="h1">{tune.name}</div>
-                <ul className="list-group border-0">
+                {tune.aliases.length > 0?<ul className="list-group border-0">
                     <li className="list-group-item border-0 h4">Also Known As:</li>
-                    {tune.aliases.slice(0,5).map((alias:any) => (
+                    {tune.aliases.slice(0, 5).map((alias:any) => (
                         <li className="list-group-item border-0 h5">{alias}</li>
                     ))}
-                </ul>
+                </ul>:<></>}
 
                 <ul className="list-group">
                     <li className="list-group-item h3 bg-warning mb-0">Comments:</li>
                     {comments.map((comment:any) => (
                         <li className="list-group-item">
-                            <span>{comment.author} says: {comment.text}</span>
+                            <Link to={`/account/profile/${comment.author}`}>{comment.author}</Link> says: {comment.text}
                             {(currentUser.username === comment.author || currentUser.role === "ADMIN") && <button className="float-end btn btn-danger" onClick={()=>deleteComment(comment._id)}>DELETE</button>}
                             </li>
                     ))}

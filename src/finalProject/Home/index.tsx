@@ -40,7 +40,7 @@ function Home() {
               </li>
               {comments.map((comment:any) => (
                         <li className="list-group-item">
-                            <span>{comment.author} says: {comment.text} about {comment.subjectName}</span>
+                            <Link to={`/account/Profile/${comment.author}`}>{comment.author}</Link> says: "{comment.text}" on: <Link to={`/tunes/${comment.subjectNum}`}>{comment.subjectName}</Link>
                             </li>
                     ))}
             </ul>
