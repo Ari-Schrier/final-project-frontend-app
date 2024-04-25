@@ -1,9 +1,7 @@
 import {HashRouter} from "react-router-dom";
 import {Routes, Route, Navigate} from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Details from "./Details";
 import Signup from "./Account/Users/signup";
-import Login from "./Login";
 import Account from "./Account"
 import Home from "./Home";
 import Navigation from "./Navigation";
@@ -11,6 +9,8 @@ import Results from "./Tunes/Search/Results";
 import Search from "./Tunes/Search";
 import TuneList from "./Tunes";
 import Tune from "./Tunes/Tune"
+import Sets from "./Sets";
+import SetViewer from "./Sets/SetViewer";
 import { Link } from "react-router-dom";
 import store from "./store";
 import { Provider } from "react-redux";
@@ -25,7 +25,8 @@ function FinalProject(){
                     <div>
                         <Routes>
                         <Route path="/" element={<Navigate to="/home"/>} />
-                        <Route path="/details"   element={<Details/>}/>
+                        <Route path="/sets"   element={<Sets/>}/>
+                        <Route path="/sets/:setId"   element={<SetViewer/>}/>
                         <Route path="/tunes" element={<TuneList/>}/>
                         <Route path="/tunes/:sessionId" element={<Tune/>}/>
                         <Route path="/home" element={<Home/>}/>

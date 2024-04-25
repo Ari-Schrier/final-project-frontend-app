@@ -9,10 +9,13 @@ function Navigation(){
                 <Link to="/home" className="text-decoration-none h1 text-warning">Home</Link>
             </div>
             <div className="mx-5">
-                <Link to="/account/Signin" className="text-decoration-none h1 text-warning">Login</Link>
+                <Link to="/account/signin" className="text-decoration-none h1 text-warning">Login</Link>
             </div>
             <div className="mx-5">
-                <Link to="/account/Profile" className="text-decoration-none h1 text-warning">Profile</Link>
+                <Link to="/sets" className="text-decoration-none h1 text-warning">Sets</Link>
+            </div>
+            <div className="mx-5">
+                <Link to="/account/profile" className="text-decoration-none h1 text-warning">Profile</Link>
             </div>
             <div className="mx-5">
             </div>

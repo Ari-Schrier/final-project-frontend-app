@@ -38,7 +38,7 @@ export default function Profile() {
                     <li className="list-group-item bg-warning">Comment History:</li>
                     {comments.map((comment:any)=>
                         <li className="list-group-item">
-                        "{comment.text}" on <span className="text-primary" onClick={()=>navigate(`/Tunes/${comment.subjectNum}`)}>{comment.subjectName}</span>
+                        "{comment.text}" on <span className="text-primary" onClick={()=>navigate(`/tunes/${comment.subjectNum}`)}>{comment.subjectName}</span>
                     </li>)}
 
                 </ul>
@@ -48,7 +48,7 @@ export default function Profile() {
                 <li className="list-group-item bg-warning">Sets:</li>
                     {sets.map((set:any)=>
                         <li className="list-group-item">
-                        <span className="text-primary" onClick={()=>navigate(`/Sets/${set.name}`)}>{set.name}</span>
+                        <span className="text-primary" onClick={()=>navigate(`/sets/${set.name}`)}>{set.name}</span>
                     </li>)}
               </ul>
             </div>

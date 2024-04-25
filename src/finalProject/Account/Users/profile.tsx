@@ -1,7 +1,7 @@
 import * as client from "./client";
 import { getSetsBy } from "../../Sets/client";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 export default function Profile() {
   const [profile, setProfile] = useState({ username: "nobody", password: "", 
     email: "", role: "USER" });
@@ -36,7 +36,7 @@ export default function Profile() {
   return (
     <div className="container">
       <h1>My Profile:</h1>
-      {profile.username && (
+      {profile.username ? (
         <div>
             <div className="input-group">
                 <span className="input-group-text">Username:</span>
@@ -97,7 +97,7 @@ export default function Profile() {
             </div>
         </div>
         </div>
-      )}
+      ): <Navigate to="/account/signin" />}
     </div>
   );
 }
