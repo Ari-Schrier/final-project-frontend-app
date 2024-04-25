@@ -8,11 +8,17 @@ export default function SetViewer(){
     const [set, setSet] = useState({name: "name", description: "description", author: "author", tunes:[]})
     const [tunes, setTunes] = useState<any>([{name:"tune1", sessionId: 0}]);
     const {setId} = useParams()
-    const fetchSet = async () => {
-        const mySet = await setClient.getSet(setId);
-        setSet(mySet);
-    }
-    useEffect(()=>{fetchSet();}, [])
+    const setUp = async () => {
+        await setClient.getSet(setId).then((set)=>{
+        setSet(set);
+        tuneClient.findTunes().then((tunes)=>{
+            const foundTunes = tunes.filter((tune:any)=> set.tunes.includes(tune.sessionId));
+            setTunes(foundTunes);
+            console.log(foundTunes);
+        });
+        });
+    };
+    useEffect(()=>{setUp();}, [])
     return(
     <div className="container">
         <div className="row justify-content-center">
