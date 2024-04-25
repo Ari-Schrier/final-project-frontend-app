@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function SetViewer(){
     const [set, setSet] = useState({name: "name", description: "description", author: "author", tunes:[]})
-    const [tunes, setTunes] = useState<any>([{name:"tune1"}]);
+    const [tunes, setTunes] = useState<any>([{name:"tune1", sessionId: 0}]);
     const {setId} = useParams()
     const fetchSet = async () => {
         const mySet = await setClient.getSet(setId);

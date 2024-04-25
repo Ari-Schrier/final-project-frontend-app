@@ -20,3 +20,13 @@ export const getSet = async (name:any) => {
   const response = await axios.get(`${SETS_API}/all/${name}`);
   return response.data[0];
 }
+
+export const updateSet = async (set:any) => {
+  const response = await axios.put(`${SETS_API}/${set.name}`, set);
+  return response.data;
+}
+
+export const getAllSets = async ()=>{
+  const response = await axios.get(`${SETS_API}`)
+  return response.data;
+}
